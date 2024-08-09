@@ -9,8 +9,17 @@
 		{
 			"path": "project"
 		},
-		{
+		{ 
 			"path": "go-microservice-authentication"
+		},
+		{
+			"path": "go-microservice-listener"
+		},
+		{
+			"path": "go-microservice-logger"
+		},
+		{
+			"path": "go-microservice-mail"
 		}
 		
 	]
