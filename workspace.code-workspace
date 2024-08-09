@@ -1,13 +1,17 @@
 {
 	"folders": [
 		{
-			"path": "front-end"
+			"path": "go-microservice-frontend"
 		},
 		{
-			"path": "broker-service"
+			"path": "go-microservice-broker"
 		},
 		{
 			"path": "project"
+		},
+		{
+			"path": "go-microservice-authentication"
 		}
+		
 	]
 }
