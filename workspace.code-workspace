@@ -1,26 +1,34 @@
 {
 	"folders": [
 		{
-			"path": "go-microservice-frontend"
+			"path": "frontend"
 		},
 		{
-			"path": "go-microservice-broker"
-		},
-		{
-			"path": "project"
+			"path": "broker-service"
 		},
 		{ 
-			"path": "go-microservice-authentication"
+			"path": "authentication-service"
 		},
 		{
-			"path": "go-microservice-listener"
+			"path": "listener-service"
 		},
 		{
-			"path": "go-microservice-logger"
+			"path": "logger-service"
 		},
 		{
-			"path": "go-microservice-mail"
+			"path": "mail-service"
 		}
 		
-	]
+	],
+	"files": [
+        {
+            "path": "./Makefile"
+        },
+		{
+            "path": "./Makefile.window"
+        },
+		{
+            "path": "./docker-compose.yml"
+        }
+    ]
 }
