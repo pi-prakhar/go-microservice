@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"go-microservice-authentication/data"
 	"net/http"
 )
 
@@ -47,6 +48,44 @@ func (app *Config) Authenticate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	app.writeJSON(w, http.StatusAccepted, payload)
+}
+
+func (app *Config) Register(w http.ResponseWriter, r *http.Request) {
+
+	var userPayload data.User
+
+	err := app.readJSON(w, r, &userPayload)
+	if err != nil {
+		app.errorJSON(w, err, http.StatusBadRequest)
+		return
+	}
+
+	user, err := app.Models.User.GetByEmail(userPayload.Email)
+
+	if err != nil {
+		app.errorJSON(w, errors.New("invalid credentials"), http.StatusBadRequest)
+		return
+	}
+
+	if user != nil {
+		app.errorJSON(w, errors.New("user already present"), http.StatusBadRequest)
+		return
+	}
+
+	status, err := app.Models.User.Insert(userPayload)
+
+	if status == 0 {
+		app.errorJSON(w, err, http.StatusInternalServerError)
+	}
+
+	payload := jsonResponse{
+		Error:   false,
+		Message: fmt.Sprintf("Successfully registered user %s", user.Email),
+		Data:    user,
+	}
+
+	app.writeJSON(w, http.StatusOK, payload)
+
 }
 
 func (app *Config) logRequest(name, data string) error {
