@@ -87,6 +87,30 @@ func (app *Config) Register(w http.ResponseWriter, r *http.Request) {
 	app.writeJSON(w, http.StatusOK, payload)
 
 }
+func (app *Config) GetAllUsers(w http.ResponseWriter, r *http.Request) {
+	// Check if the request method is GET
+	if r.Method != http.MethodGet {
+		app.errorJSON(w, errors.New("method not allowed"), http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Call the service function to get all users
+	users, err := app.Models.User.GetAll()
+	if err != nil {
+		app.errorJSON(w, err, http.StatusInternalServerError)
+		return
+	}
+
+	// Prepare the response payload
+	payload := jsonResponse{
+		Error:   false,
+		Message: "Successfully retrieved all users",
+		Data:    users,
+	}
+
+	// Write the JSON response
+	app.writeJSON(w, http.StatusOK, payload)
+}
 
 func (app *Config) logRequest(name, data string) error {
 	var entry struct {
