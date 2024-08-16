@@ -47,6 +47,7 @@ services:
     restart: always
     ports:
       - "8081:80"
+      - "2345:2345"
     deploy:
       mode: replicated
       replicas: 1
