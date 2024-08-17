@@ -43,10 +43,11 @@ services:
   authentication-service:
     build:
       context: ./authentication-service
-      dockerfile: authentication-service.dockerfile
+      dockerfile: authentication-service.debug.dockerfile
     restart: always
     ports:
       - "8081:80"
+      - "2345:2345"
     deploy:
       mode: replicated
       replicas: 1
