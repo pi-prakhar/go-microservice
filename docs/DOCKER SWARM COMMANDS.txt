@@ -1,0 +1,32 @@
+DOCKER SWARM COMMANDS:
+## To user docker swarm write a swarm.yml file for the current project.
+
+initialize -> docker swarm init // save the token hash to use later for adding extra worker node or manager node
+to get token again -> docker swarm join-token work
+		   -> docker swarm join-token manager
+
+start services -> docker stack deploy -c swarm.yml <give name to your swarm>
+
+view all running service -> docker service ls
+
+SCALE SERVICES:
+scale services -> docker service scale <service_name>=3
+
+UPDATING SERVICES: 
+update image -> docker build -f <dockerfile_name> -t <username/imagename:new-imagetag> .
+push to hub -> docker push <username/imagename:new-imagetag> 
+
+##Now before updating the service scale the service to 2 because it gets updated one by one which will
+##result into zero downtime.
+
+scale service -> docker service scale <service_name>=2
+update service -> docker service update --image <username/imagename:new-imagetag> <service_name>
+
+
+STOPPING DOCKER SWARM:
+
+scaling service to zero -> docker service scale <service_name>=0
+removing the whole swarm -> docker stack rm <swarm_name>
+leaving the swarm -> docker swarm leave --force
+
+
