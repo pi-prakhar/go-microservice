@@ -1,10 +1,14 @@
 version: '3'
 
 services:
+  frontend-service:
+    image: 16181181418/go-microservice-frontend-service:1.0.0
+    deploy:
+      mode: replicated
+      replicas: 1
+
   broker-service:
     image: 16181181418/go-microservice-broker-service:1.0.0
-    ports:
-      - "8080:80"
     deploy:
       mode: replicated
       replicas: 1

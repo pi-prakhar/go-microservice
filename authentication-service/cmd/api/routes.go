@@ -25,6 +25,6 @@ func (app *Config) routes() http.Handler {
 
 	mux.Post("/authenticate", app.Authenticate)
 	mux.Post("/register", app.Register)
-	mux.Post("/get-all", app.GetAllUsers)
+	mux.Get("/get-all", app.GetAllUsers)
 	return mux
 }
