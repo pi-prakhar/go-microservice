@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -31,6 +32,12 @@ func render(w http.ResponseWriter, t string) {
 		"templates/footer.partial.gohtml",
 	}
 
+	var data struct {
+		BrokerURL string
+	}
+
+	data.BrokerURL = os.Getenv("BROKER_URL")
+
 	var templateSlice []string
 	templateSlice = append(templateSlice, fmt.Sprintf("templates/%s", t))
 
@@ -44,7 +51,7 @@ func render(w http.ResponseWriter, t string) {
 		return
 	}
 
-	if err := tmpl.Execute(w, nil); err != nil {
+	if err := tmpl.Execute(w, data); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }

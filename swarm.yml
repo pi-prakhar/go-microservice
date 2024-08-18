@@ -2,7 +2,7 @@ version: '3'
 
 services:
   caddy:
-    image: 16181181418/go-microservice-caddy:1.0.0
+    image: 16181181418/go-microservice-caddy:1.0.1
     deploy:
       mode: replicated
       replicas: 1
@@ -14,13 +14,15 @@ services:
       - caddy_config:/config
 
   frontend-service:
-    image: 16181181418/go-microservice-frontend-service:1.0.0
+    image: 16181181418/go-microservice-frontend-service:1.0.2
     deploy:
       mode: replicated
       replicas: 1
+    environment:
+      BROKER_URL: "http://backend"
 
   broker-service:
-    image: 16181181418/go-microservice-broker-service:1.0.0
+    image: 16181181418/go-microservice-broker-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
