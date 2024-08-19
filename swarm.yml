@@ -14,7 +14,7 @@ services:
       - caddy_config:/config
 
   frontend-service:
-    image: 16181181418/go-microservice-frontend-service:1.0.2
+    image: 16181181418/go-microservice-frontend-service:1.0.4
     deploy:
       mode: replicated
       replicas: 1
@@ -22,7 +22,7 @@ services:
       BROKER_URL: "http://backend"
 
   broker-service:
-    image: 16181181418/go-microservice-broker-service:1.0.1
+    image: 16181181418/go-microservice-broker-service:1.0.2
     deploy:
       mode: replicated
       replicas: 1
