@@ -2,7 +2,7 @@ version: '3'
 
 services:
   caddy:
-    image: 16181181418/go-microservice-caddy:1.0.2
+    image: 16181181418/go-microservice-caddy:1.0.3
     deploy:
       mode: replicated
       replicas: 1
@@ -22,7 +22,7 @@ services:
       mode: replicated
       replicas: 1
     environment:
-      BROKER_URL: "http://broker.piprakhar.dev"
+      BROKER_URL: "https://broker.piprakhar.dev"
 
   broker-service:
     image: 16181181418/go-microservice-broker-service:1.0.2

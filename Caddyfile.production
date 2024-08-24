@@ -21,13 +21,14 @@
 	}
 }
 
-swarm.piprakhar.dev:80 {
+swarm.piprakhar.dev {
 	encode zstd gzip
 	import static
+    import security
 
 	reverse_proxy  http://frontend-service:8081
 }
 
-broker.piprakhar.dev:80 {
+broker.piprakhar.dev {
 	reverse_proxy http://broker-service:8080
 }
