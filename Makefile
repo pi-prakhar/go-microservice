@@ -33,7 +33,7 @@ up:
 ## up_debug: starts all containers in the background without forcing build in debug mode
 up_debug:
 	@echo "Starting Docker images..."
-	docker-compose -f docker-compose.debug.yml up -d
+	docker-compose up -d -f docker-compose.debug.yml
 	@echo "Docker images started!"
 
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose
@@ -49,7 +49,7 @@ up_build_debug: build_broker build_auth build_logger build_mail build_listener b
 	@echo "Stopping docker images (if running...)"
 	docker-compose down
 	@echo "Building (when required) and starting docker images..."
-	docker-compose up -f docker-compose.debug.yml --build -d
+	docker-compose --file docker-compose.debug.yml up --build --detach 
 	@echo "Docker images built and started!"
 
 ## down: stop docker compose

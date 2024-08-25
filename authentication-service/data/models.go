@@ -34,14 +34,14 @@ type Models struct {
 
 // User is the structure which holds one user from the database.
 type User struct {
-	ID        int       `json:"id"`
-	Email     string    `json:"email"`
-	FirstName string    `json:"first_name,omitempty"`
-	LastName  string    `json:"last_name,omitempty"`
-	Password  string    `json:"-"`
-	Active    int       `json:"active"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID        int            `json:"id"`
+	Email     string         `json:"email"`
+	FirstName sql.NullString `json:"first_name,omitempty"`
+	LastName  sql.NullString `json:"last_name,omitempty"`
+	Password  string         `json:"-"`
+	Active    int            `json:"active"`
+	CreatedAt time.Time      `json:"created_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
 }
 
 // GetAll returns a slice of all users, sorted by last name
@@ -88,7 +88,7 @@ func (u *User) GetByEmail(email string) (*User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
 	defer cancel()
 
-	query := `select id, email, first_name, last_name, password, active, created_at, updated_at from users where email = '$1'`
+	query := `select id, email, first_name, last_name, password, active, created_at, updated_at from users where email = $1`
 
 	fmt.Println(query)
 
